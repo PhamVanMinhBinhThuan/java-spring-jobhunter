@@ -42,4 +42,9 @@ public class UserController {
     public List<User> getAllUsers() {
         return this.userService.fetchAllUsers();
     }
+
+    @PutMapping("/user")
+    public User updateUser(@RequestBody User user) {
+        return this.userService.handleUpdateUser(user);
+    }
 }
