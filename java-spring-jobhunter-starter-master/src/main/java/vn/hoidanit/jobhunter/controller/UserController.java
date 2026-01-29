@@ -7,6 +7,8 @@ import vn.hoidanit.jobhunter.service.UserService;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,30 +23,34 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    
-    @PostMapping("/user")
-    public User createNewUSer(@RequestBody User user) {
-        return this.userService.handleCreateUser(user);
+
+    @PostMapping("/users")
+    public ResponseEntity<User> createNewUSer(@RequestBody User user) {
+        User newUser = this.userService.handleCreateUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
-    
-    @DeleteMapping("/user/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id") Long id) {
         this.userService.handleDeleteUser(id);
-        return "Deleted";
+        return ResponseEntity.status(HttpStatus.OK).body("Deleted");
     }
 
-    @GetMapping("/user/{id}")
-    public User getUserById(@PathVariable("id") Long id) {
-        return this.userService.fetchUserById(id);
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+        User fetchUser = this.userService.fetchUserById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(fetchUser);
     }
 
-    @GetMapping("/user")
-    public List<User> getAllUsers() {
-        return this.userService.fetchAllUsers();
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        // ResponseEntity.ok(this.userService.fetchAllUser());
+        return ResponseEntity.status(HttpStatus.OK).body(this.userService.fetchAllUsers());
     }
 
-    @PutMapping("/user")
-    public User updateUser(@RequestBody User user) {
-        return this.userService.handleUpdateUser(user);
+    @PutMapping("/users")
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+        User updateUser = this.userService.handleUpdateUser(user);
+        return ResponseEntity.ok(updateUser);
     }
 }
