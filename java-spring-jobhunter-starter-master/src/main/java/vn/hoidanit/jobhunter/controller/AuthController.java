@@ -52,6 +52,7 @@ public class AuthController {
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
         // authentication khong luu mat khau nguoi dung sau khi dang nhap thanh cong
+        // set thong tin nguoi dung dang nhap vao context (co the su dung sau nay)
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         ResLoginDTO res = new ResLoginDTO();
