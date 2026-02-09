@@ -44,16 +44,19 @@ public class SecurityConfiguration {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         authz -> authz
-                                .requestMatchers("/", "/api/v1/auth/login", "/api/v1/auth/refresh")
+                                .requestMatchers("/",
+                                        "/api/v1/auth/login",
+                                        "/api/v1/auth/refresh",
+                                        "/storage/**")
                                 .permitAll()
                                 .anyRequest().authenticated())
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults())
                         .authenticationEntryPoint(customAuthenticationEntryPoint))
                 // default exception
                 // .exceptionHandling(
-                //         exceptions -> exceptions
-                //                 .authenticationEntryPoint(customAuthenticationEntryPoint) // 401
-                //                 .accessDeniedHandler(new BearerTokenAccessDeniedHandler())) // 403
+                // exceptions -> exceptions
+                // .authenticationEntryPoint(customAuthenticationEntryPoint) // 401
+                // .accessDeniedHandler(new BearerTokenAccessDeniedHandler())) // 403
 
                 .formLogin(f -> f.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
