@@ -1,8 +1,8 @@
 package vn.hoidanit.jobhunter.util.error;
 
-public class IdInvalidException extends Exception {
+public class StorageException extends Exception {
     // Constructor that accepts a message
-    public IdInvalidException(String message) {
+    public StorageException(String message) {
         super(message);
     }
 }
