@@ -43,7 +43,7 @@ public class RoleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.roleService.create(r));
     }
 
-    @PutMapping("roles")
+    @PutMapping("/roles")
     @ApiMessage("Update a role")
     public ResponseEntity<Role> putMethodName(@Valid @RequestBody Role r) throws IdInvalidException {
         // check id
@@ -56,7 +56,7 @@ public class RoleController {
         //     throw new IdInvalidException("Role với name = " + r.getName() + " đã tồn tại");
         // }
         
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.roleService.update(r));
+        return ResponseEntity.ok().body(this.roleService.update(r));
     }
 
     @DeleteMapping("roles/{id}")
