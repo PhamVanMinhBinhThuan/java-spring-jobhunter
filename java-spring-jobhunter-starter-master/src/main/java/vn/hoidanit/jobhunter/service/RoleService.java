@@ -1,6 +1,7 @@
 package vn.hoidanit.jobhunter.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import vn.hoidanit.jobhunter.domain.Permission;
@@ -67,7 +68,11 @@ public class RoleService {
     }
 
     public Role fetchById(Long id) {
-        return this.roleRepository.findById(id).orElse(null);
+        Optional<Role> roleOptional = this.roleRepository.findById(id);
+        if (roleOptional.isPresent()) {
+            return roleOptional.get();
+        }
+        return null;
     }
 
     public void delete(Long id) {
