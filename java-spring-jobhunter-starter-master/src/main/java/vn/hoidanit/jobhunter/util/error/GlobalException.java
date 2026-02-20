@@ -18,10 +18,21 @@ import vn.hoidanit.jobhunter.domain.response.RestResponse;
 
 @RestControllerAdvice
 public class GlobalException {
+
+    // handle all exception
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<RestResponse<Object>> handleAllException(Exception ex) {
+        RestResponse<Object> res = new RestResponse<Object>();
+        res.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        res.setMessage(ex.getMessage());
+        res.setError("Internal Server Error");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
+    }
+
     @ExceptionHandler(value = {
-        UsernameNotFoundException.class,
-        BadCredentialsException.class,
-        IdInvalidException.class,
+            UsernameNotFoundException.class,
+            BadCredentialsException.class,
+            IdInvalidException.class,
     })
     public ResponseEntity<RestResponse<Object>> handleIdException(Exception ex) {
         RestResponse<Object> res = new RestResponse<>();
@@ -34,14 +45,14 @@ public class GlobalException {
     }
 
     @ExceptionHandler(value = {
-        NoResourceFoundException.class,
+            NoResourceFoundException.class,
     })
     public ResponseEntity<RestResponse<Object>> handleNotFoundException(Exception ex) {
         RestResponse<Object> res = new RestResponse<Object>();
         res.setStatusCode(HttpStatus.NOT_FOUND.value());
         res.setMessage(ex.getMessage());
         res.setError("404 Not Found. URL may not exist...");
-        
+
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
     }
 
@@ -56,12 +67,12 @@ public class GlobalException {
 
         List<String> errors = fieldErrors.stream().map(f -> f.getDefaultMessage()).collect(Collectors.toList());
         res.setMessage(errors.size() > 1 ? errors : errors.get(0));
-        
+
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
     }
 
     @ExceptionHandler(value = {
-        StorageException.class,
+            StorageException.class,
     })
     public ResponseEntity<RestResponse<Object>> handleFileUploadException(Exception ex) {
         RestResponse<Object> res = new RestResponse<>();
@@ -74,7 +85,7 @@ public class GlobalException {
     }
 
     @ExceptionHandler(value = {
-        PermissionException.class,
+            PermissionException.class,
     })
     public ResponseEntity<RestResponse<Object>> handlePermissionException(Exception ex) {
         RestResponse<Object> res = new RestResponse<Object>();
