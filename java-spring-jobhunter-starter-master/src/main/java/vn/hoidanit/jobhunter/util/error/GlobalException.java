@@ -27,8 +27,8 @@ public class GlobalException {
         RestResponse<Object> res = new RestResponse<>();
 
         res.setStatusCode(HttpStatus.BAD_REQUEST.value());
-        res.setError(ex.getMessage());
-        res.setMessage("Exception occurs...");
+        res.setMessage(ex.getMessage());
+        res.setError("Exception occurs...");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
     }
@@ -39,8 +39,8 @@ public class GlobalException {
     public ResponseEntity<RestResponse<Object>> handleNotFoundException(Exception ex) {
         RestResponse<Object> res = new RestResponse<Object>();
         res.setStatusCode(HttpStatus.NOT_FOUND.value());
-        res.setError(ex.getMessage());
-        res.setMessage("404 Not Found. URL may not exist...");
+        res.setMessage(ex.getMessage());
+        res.setError("404 Not Found. URL may not exist...");
         
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
     }
@@ -67,8 +67,8 @@ public class GlobalException {
         RestResponse<Object> res = new RestResponse<>();
 
         res.setStatusCode(HttpStatus.BAD_REQUEST.value());
-        res.setError(ex.getMessage());
-        res.setMessage("Exception upload file...");
+        res.setMessage(ex.getMessage());
+        res.setError("Exception upload file...");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
     }
@@ -80,8 +80,8 @@ public class GlobalException {
         RestResponse<Object> res = new RestResponse<Object>();
 
         res.setStatusCode(HttpStatus.FORBIDDEN.value());
-        res.setError(ex.getMessage());
-        res.setMessage("Forbidden");
+        res.setMessage(ex.getMessage());
+        res.setError("Forbidden");
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(res);
     }
 }
