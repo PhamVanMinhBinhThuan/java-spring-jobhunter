@@ -35,8 +35,17 @@ public class FormatRestResponse implements ResponseBodyAdvice<Object> {
         RestResponse<Object> res = new RestResponse<>();
         res.setStatusCode(status);
 
+        // if (!MediaType.APPLICATION_JSON.equals(selectedContentType)) {
+        //     return body;
+        // }
+
+        // String path = request.getURI().getPath();
+        // if (path.startsWith("/v3/api-docs") || path.startsWith("/swagger-ui")) {
+        //     return body;
+        // }
+
         if (body instanceof String || body instanceof Resource) {
-            return body;
+        return body;
         }
 
         String path = request.getURI().getPath();
