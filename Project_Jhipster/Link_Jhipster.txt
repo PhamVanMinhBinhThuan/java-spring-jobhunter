@@ -1,0 +1,2 @@
+Link: https://www.jhipster.tech/
+Link Github: https://github.com/jhipster/generator-jhipster
